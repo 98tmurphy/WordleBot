@@ -13,7 +13,9 @@ def cullWordlist():
 
     count = 0
     for line in lines:
-        if(len(line) == 6):
+        if(len(line) == 6 
+        and all(chr.isalpha() or chr.isspace() for chr in line)
+        and line[0].islower()):
             flfile.writelines(line)
             count += 1
 
