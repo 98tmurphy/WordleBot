@@ -14,22 +14,40 @@ def pickRandomWord():
 def getPlayerGuess():
     while(True):
         guess = input("Make your guess: ")
-        if(len(guess)>6):
+        if(len(guess)==5):
             break
         else:
-            print("Invalid guess, contains to many charaters")
-    return 
+            print("Invalid guess, must contain 5 characters")
+    return guess
 
-def checkGuess(guess, answer, tries):
-    if(tries != 6):
-        return false
-    if(guess == answer):
-        return
+def checkGuess(guess, answer):
+        
+    if(guess == answer.strip()):
+        print('Correct!')
+        return True
     
     i = 0
-    for letter in answer:
-        if(letter == guess[i]):
-            
+    clue =""
+    for letter in guess:
+        if(letter in answer):
+            index = answer.index(letter)
+            if(index == i):
+                clue = clue + '*'
+            else:
+                clue = clue + '!'
+        else:
+            clue = clue + '-'
+        i+=1
 
-pickRandomWord()
-getPlayerGuess()
+    print(clue)
+    return False
+
+def main():
+    answer = pickRandomWord()
+    won = False
+    while(won!=True):
+        guess  = getPlayerGuess()
+        won = checkGuess(guess, answer)
+
+main()
+   
