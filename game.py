@@ -2,7 +2,7 @@ import os
 import random
 def pickRandomWord():
     lines = []
-    with open("answer_words.txt") as file:
+    with open("5_letter_wrods.txt") as file:
         lines = file.readlines()
 
     chosenWord = random.choice(lines)
@@ -12,24 +12,13 @@ def pickRandomWord():
     return chosenWord
 
 def getPlayerGuess():
-    with open("5_letter_wrods.txt") as file:
-            lines = file.readlines()
     while(True):
         guess = input("Make your guess: ")
-        if(validateGuess(guess, lines)):
-            return guess
-        else:
-            print("Invalid word. Please mae sure youre word is 5 letters, is an actual word, has no punctation/spaces/numbers etc")
-def validateGuess(guess,lines):
-    validWord = False
-    if(len(guess)!=5):
-        print("here boo")
-        return validWord
-    for line in lines:
-        if line.strip() == guess.strip():
-            validWord = True
+        if(len(guess)==5):
             break
-    return validWord
+        else:
+            print("Invalid guess, must contain 5 characters")
+    return guess
 
 def checkGuess(guess, answer):
         
@@ -61,4 +50,3 @@ def main():
         won = checkGuess(guess, answer)
 
 main()
-   
